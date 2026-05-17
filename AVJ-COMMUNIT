@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚡ AVJ COMMUNITY ⚡</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-main: #060913; --bg-card: #0f1526; --bg-nav: rgba(6, 9, 19, 0.85);
+            --primary: #3b82f6; --primary-hover: #1d4ed8; --primary-glow: rgba(59, 130, 246, 0.3);
+            --text-muted: #94a3b8; --accent: #a855f7;
+            --premium-gradient: linear-gradient(135deg, #fffff0 0%, #facc15 50%, #eab308 100%);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; }
+        body { background-color: var(--bg-main); color: #ffffff; overflow-x: hidden; }
+        header { display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; background: var(--bg-nav); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        .logo { font-size: 18px; font-weight: 900; letter-spacing: 0.5px; background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 50%, #3b82f6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: flex; align-items: center; gap: 6px; text-transform: uppercase; }
+        .logo-accent { background: var(--premium-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .nav-tabs { display: flex; gap: 10px; }
+        .tab-link { background: transparent; border: none; color: var(--text-muted); font-weight: 600; font-size: 14px; padding: 8px 16px; cursor: pointer; border-radius: 8px; transition: all 0.2s; }
+        .tab-link:hover { color: #fff; background: rgba(255,255,255,0.03); }
+        .tab-link.active { color: #fff; background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(59, 130, 246, 0.3); }
+        .auth-container { display: flex; align-items: center; }
+        .user-profile-box { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); padding: 6px 12px; border-radius: 50px; }
+        .user-profile-box img { width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--primary); }
+        .user-profile-box span { font-size: 13px; font-weight: 600; }
+        .logout-btn { background: transparent; border: none; color: #ef4444; cursor: pointer; font-size: 12px; padding-left: 4px; }
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; }
+        .cart-btn { background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); padding: 10px 18px; color: #fff; font-weight: 600; font-size: 14px; border-radius: 10px; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+        .hero { min-height: 35vh; display: flex; justify-content: center; align-items: center; text-align: center; padding: 40px 20px; }
+        .hero h1 { font-size: 38px; font-weight: 900; margin-bottom: 15px; background: linear-gradient(180deg, #ffffff 0%, #94a3b8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { font-size: 15px; color: var(--text-muted); margin-bottom: 20px; }
+        .hero button { padding: 12px 28px; border: none; background: var(--primary); color: white; font-weight: 600; border-radius: 12px; cursor: pointer; }
+        .trust-badge { display: flex; justify-content: center; margin-bottom: 30px; padding: 0 20px; }
+        .badge-content { background: rgba(250, 204, 21, 0.1); border: 1px solid rgba(250, 204, 21, 0.3); padding: 12px 25px; border-radius: 50px; display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 14px; }
+        .badge-content i, .stars-static i { color: #facc15; }
+        .products { max-width: 1200px; margin: 0 auto; padding: 20px 5%; }
+        .products h2 { text-align: center; margin-bottom: 40px; font-size: 28px; font-weight: 800; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .card { background: var(--bg-card); border: 1px solid rgba(255, 255, 255, 0.04); border-radius: 20px; padding: 24px; display: flex; flex-direction: column; justify-content: space-between; }
+        .img-container { width: 100%; height: 145px; border-radius: 14px; margin-bottom: 18px; overflow: hidden; }
+        .card img { width: 100%; height: 100%; object-fit: cover; }
+        .card h3 { font-size: 19px; font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        .card-info { color: var(--text-muted); font-size: 13px; margin-bottom: 20px; line-height: 1.4; }
+        .card-footer { display: flex; justify-content: space-between; align-items: center; }
+        .price { color: #ffffff; font-size: 22px; font-weight: 700; }
+        .buy { padding: 10px 18px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); color: white; font-weight: 600; border-radius: 10px; cursor: pointer; }
+        .card:hover .buy { background: var(--primary); border-color: transparent; }
+        .reviews-section { max-width: 600px; margin: 40px auto 20px auto; padding: 0 20px; }
+        .reviews-section h2 { text-align: center; font-size: 24px; margin-bottom: 30px; }
+        .review-form { background: var(--bg-card); border: 1px solid rgba(255,255,255,0.05); padding: 20px; border-radius: 16px; margin-bottom: 30px; }
+        .review-form h3 { font-size: 16px; margin-bottom: 15px; color: var(--text-muted); }
+        .review-form input, .review-form textarea { width: 100%; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.08); padding: 12px; border-radius: 8px; color: white; margin-bottom: 12px; }
+        .rating-selector { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; }
+        .stars-input i { color: rgba(255,255,255,0.2); cursor: pointer; font-size: 18px; }
+        .stars-input i.active { color: #facc15; }
+        .submit-review-btn { background: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; width: 100%; }
+        .reviews-container { display: flex; flex-direction: column; gap: 15px; }
+        .review-box { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.03); padding: 15px; border-radius: 12px; }
+        .review-header { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px; }
+        .review-stars i { color: #facc15; font-size: 12px; }
+        .review-box p { font-size: 13.5px; color: var(--text-muted); }
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 7, 12, 0.85); backdrop-filter: blur(8px); display: none; justify-content: center; align-items: center; z-index: 2000; padding: 20px; }
+        .cart { width: 100%; max-width: 420px; background: var(--bg-card); border: 1px solid rgba(255, 255, 255, 0.08); padding: 25px; border-radius: 24px; display: flex; flex-direction: column; max-height: 85vh; overflow-y: auto; }
+        .cart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        .clear-btn { background: transparent; border: none; color: #ef4444; cursor: pointer; font-size: 13px; display: flex; align-items: center; gap: 4px; }
+        #items { margin-bottom: 20px; }
+        .item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.03); }
+        .item-details { display: flex; flex-direction: column; }
+        .item-name { font-weight: 500; font-size: 15px; }
+        .item-price { color: var(--primary); font-size: 13px; }
+        .remove-item { background: transparent; border: none; color: var(--text-muted); cursor: pointer; }
+        .checkout-btn { width: 100%; padding: 14px; border: none; color: white; font-weight: 700; border-radius: 12px; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; font-size: 15px; }
+        .close { width: 100%; padding: 12px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.08); color: var(--text-muted); border-radius: 12px; cursor: pointer; }
+        .empty-cart-text { text-align: center; color: var(--text-muted); padding: 30px 0; }
+        .digital-invoice { background: rgba(255, 255, 255, 0.02); border: 1px dashed rgba(255, 255, 255, 0.15); padding: 16px; border-radius: 12px; margin-bottom: 20px; }
+        .invoice-line { display: flex; justify-content: space-between; font-size: 14px; padding: 6px 0; }
+        .payment-methods-box { margin-top: 15px; }
+        .payment-methods-box h3 { font-size: 15px; margin-bottom: 10px; color: var(--text-muted); }
+        .payment-card { background: rgba(0, 0, 0, 0.25); border: 1px solid rgba(255, 255, 255, 0.05); padding: 12px; border-radius: 10px; margin-bottom: 10px; }
+        .pay-title { font-weight: 700; font-size: 14px; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+        .pay-detail { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+        .features { max-width: 1200px; margin: 40px auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; padding: 0 5%; }
+        .feature { background: rgba(255, 255, 255, 0.01); border: 1px solid rgba(255, 255, 255, 0.03); padding: 24px; border-radius: 16px; display: flex; gap: 16px; align-items: center; }
+        .feature-icon { background: rgba(59, 130, 246, 0.1); color: var(--primary); width: 44px; height: 44px; min-width: 44px; border-radius: 12px; display: flex; justify-content: center; align-items: center; }
+        footer { padding: 30px 20px; border-top: 1px solid rgba(255, 255, 255, 0.05); text-align: center; color: var(--text-muted); font-size: 13px; }
+        @media(max-width: 768px) { header { padding: 15px 4%; flex-wrap: wrap; gap: 10px; } .nav-tabs { order: 3; width: 100%; justify-content: center; } .auth-container { order: 2; } .tab-link { font-size: 13px; padding: 6px 12px; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo"><i class="fa-solid fa-crown logo-accent"></i> AVJ&nbsp;<span class="logo-accent">COMMUNITY</span></div>
+        <nav class="nav-tabs">
+            <button id="tab-btn-inicio" class="tab-link active" onclick="switchTab('inicio')">Inicio</button>
+            <button id="tab-btn-comentarios" class="tab-link" onclick="switchTab('comentarios')">Comentarios</button>
+        </nav>
+        <div class="auth-container">
+            <div id="google-login-btn"></div>
+            <div id="user-profile" class="user-profile-box" style="display: none;">
+                <img id="user-avatar" src="" alt="Avatar"><span id="user-name"></span><button class="logout-btn" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i></button>
+            </div>
+        </div>
+        <button class="cart-btn" onclick="openCart()"><i class="fa-solid fa-shopping-bag"></i> Pedido (<span id="count">0</span>)</button>
+    </header>
+    <main id="tab-content-inicio" class="tab-panel active">
+        <section class="hero">
+            <div class="hero-content">
+                <h1>✨ AVJ COMMUNITY ✨</h1>
+                <p>Tu rincón digital exclusivo para licencias de Streaming e Inteligencia Artificial Premium. Automatizado, seguro y garantizado.</p>
+                <button onclick="document.getElementById('prod-section').scrollIntoView({behavior: 'smooth'})">Explorar Catálogo <i class="fa-solid fa-arrow-down" style="margin-left:6px"></i></button>
+            </div>
+        </section>
+        <section class="trust-badge">
+            <div class="badge-content">
+                <i class="fa-solid fa-shield-heart"></i><span>+20 Clientes en Confianza y Satisfechos</span>
+                <div class="stars-static"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+            </div>
+        </section>
+        <section class="products" id="prod-section">
+            <h2>Nuestros Servicios Premium</h2>
+            <div class="grid">
+                <div class="card">
+                    <div>
+                        <div class="img-container"><img src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=400&q=80"></div>
+                        <h3><i class="fa-solid fa-play" style="color:#e50914"></i> Netflix</h3>
+                        <p class="card-info">Acceso Ultra HD 4K en pantallas privadas. Disfruta todo el catálogo oficial sin interrupciones.</p>
+                    </div>
+                    <div class="card-footer"><div class="price">$4.50</div><button class="buy" onclick="add('Netflix', 4.50)">Agregar</button></div>
+                </div>
+                <div class="card">
+                    <div>
+                        <div class="img-container"><img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400&q=80"></div>
+                        <h3><i class="fa-solid fa-star" style="color:#00e5ff"></i> Disney Bundle</h3>
+                        <p class="card-info">Combo triple que incluye Disney+, Hulu y ESPN. Todo el contenido familiar y deportes en vivo.</p>
+                    </div>
+                    <div class="card-footer"><div class="price">$3.50</div><button class="buy" onclick="add('Disney+Hulu+ESPN', 3.50)">Agregar</button></div>
+                </div>
+                <div class="card">
+                    <div>
+                        <div class="img-container"><img src="https://images.unsplash.com/photo-1594909122845-11baa439b7bf?w=400&q=80"></div>
+                        <h3><i class="fa-solid fa-mountain" style="color:#0054ff"></i> Paramount+</h3>
+                        <p class="card-info">Acceso Premium completo a las mejores producciones de cine y torneos exclusivos.</p>
+                    </div>
+                    <div class="card-footer"><div class="price">$3.00</div><button class="buy" onclick="add('Paramount', 3.00)">Agregar</button></div>
+                </div>
+                <div class="card">
+                    <div>
+                        <div class="img-container"><img src="https://images.unsplash.com/photo-1616469829581-73993eb86b02?w=400&q=80"></div>
+                        <h3><i class="fa-solid fa-clapperboard" style="color:#9d4edd"></i> Max (HBO)</h3>
+                        <p class="card-info">Series multipremiadas mundiales, estrenos de taquilla directo a tu pantalla.</p>
+                    </div>
+                    <div class="card-footer"><div class="price">$3.50</div><button class="buy" onclick="add('HBO', 3.50)">Agregar</button></div>
+                </div>
+<div class="card">
+                    <div>
+                        <div class="img-container"><img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=400&q=80"></div>
+                        <h3><i class="fa-brands fa-youtube" style="color:#ff0000"></i> YouTube Premium</h3>
+                        <p class="card-info">Cero anuncios molestos, reproducción en segundo plano y YouTube Music incluido.</p>
+                    </div>
+                    <div class="card-footer"><div class="price">$4.50</div><button class="buy" onclick="add('YouTube Premium', 4.50)">Agregar</button></div>
+                </div>
+                <div class="card">
+                    <div>
+                        <div class="img-container"><img src="https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?w=400&q=80"></div>
+                        <h3><i class="fa-brands fa-spotify" style="color:#1ed760"></i> Spotify Premium</h3>
+                        <p class="card-info">Música sin límites ni interrupciones comerciales. Descarga tus playlists de inmediato.</p>
+                    </div>
+                    <div class="card-footer"><div class="price">$3.50</div><button class="buy" onclick="add('Spotify Premium', 3.50)">Agregar</button></div>
+                </div>
+                <div class="card">
+                    <div>
+                        <div class="img-container"><img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&q=80"></div>
+                        <h3><i class="fa-solid fa-cloud" style="color:#ea4335"></i> Gemini + Google One</h3>
+                        <p class="card-info">Almacenamiento masivo de 5TB de espacio en la nube de Google y acceso total a Gemini Advanced.</p>
+                    </div>
+                    <div class="card-footer"><div class="price">$12.00</div><button class="buy" onclick="add('Gemini+Google one 5TB', 12.00)">Agregar</button></div>
+                </div>
+                <div class="card">
+                    <div>
+                        <div class="img-container"><img src="https://images.unsplash.com/photo-1677442136019-21780efad99a?w=400&q=80"></div>
+                        <h3><i class="fa-solid fa-robot" style="color:#10a37f"></i> ChatGPT PLUS</h3>
+                        <p class="card-info">Acceso prioritario a los modelos más veloces de OpenAI. Respuestas inmediatas sin restricciones.</p>
+                    </div>
+                    <div class="card-footer"><div class="price">$7.00</div><button class="buy" onclick="add('Chat gpt PLUS', 7.00)">Agregar</button></div>
+                </div>
+                <div class="card">
+                    <div>
+                        <div class="img-container"><img src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=400&q=80"></div>
+                        <h3><i class="fa-solid fa-circle-play" style="color:#f47521"></i> Crunchyroll</h3>
+                        <p class="card-info">Pase mensual Mega Fan. Disfruta del mejor anime del mundo en HD y sin publicidad.</p>
+                    </div>
+                    <div class="card-footer"><div class="price">$3.50</div><button class="buy" onclick="add('Crunchyroll Mensual', 3.50)">Agregar</button></div>
+                </div>
+                <div class="card">
+                    <div>
+                        <div class="img-container"><img src="https://images.unsplash.com/photo-1578632767115-351597cf2477?w=400&q=80"></div>
+                        <h3><i class="fa-solid fa-crown" style="color:#f47521"></i> Crunchyroll Anual</h3>
+                        <p class="card-info">Suscripción premium por 12 meses completos. Asegura tus series para todo el año.</p>
+                    </div>
+                    <div class="card-footer"><div class="price">$10.00</div><button class="buy" onclick="add('Crunchyroll Anual', 10.00)">Agregar</button></div>
+                </div>
+                <div class="card">
+                    <div>
+                        <div class="img-container"><img src="https://images.unsplash.com/photo-1612287230202-1bf1d85d1bdf?w=400&q=80"></div>
+                        <h3><i class="fa-brands fa-steam" style="color:#171a21"></i> Steam Balance</h3>
+                        <p class="card-info">Expande tu biblioteca de videojuegos de PC o adquiere skins directamente en tu cuenta.</p>
+                    </div>
+                    <div class="card-footer"><div class="price">$5.00</div><button class="buy" onclick="add('Steam', 5.00)">Agregar</button></div>
+                </div>
+                <div class="card">
+                    <div>
+                        <div class="img-container"><img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=400&q=80"></div>
+                        <h3><i class="fa-solid fa-shield" style="color:#468af7"></i> NordVPN</h3>
+                        <p class="card-info">Navegación 100% privada y segura. Desbloquea catálogos de streaming internacionales.</p>
+                    </div>
+                    <div class="card-footer"><div class="price">$3.00</div><button class="buy" onclick="add('Nord VPN', 3.00)">Agregar</button></div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <main id="tab-content-comentarios" class="tab-panel">
+        <section class="reviews-section">
+            <h2>Opiniones de la Comunidad</h2>
+            <div class="review-form">
+                <h3>Deja tu Comentario</h3>
+                <input type="text" id="review-name" placeholder="Tu Nombre o Usuario" required>
+                <textarea id="review-text" placeholder="Cuéntanos tu experiencia..." rows="3" required></textarea>
+                <div class="rating-selector">
+                    <span>Calificación:</span>
+                    <div class="stars-input">
+                        <i class="fa-solid fa-star" onclick="setRating(1)"></i><i class="fa-solid fa-star" onclick="setRating(2)"></i><i class="fa-solid fa-star" onclick="setRating(3)"></i><i class="fa-solid fa-star" onclick="setRating(4)"></i><i class="fa-solid fa-star" onclick="setRating(5)"></i>
+                    </div>
+                </div>
+                <button class="submit-review-btn" onclick="submitReview()">Publicar Reseña</button>
+            </div>
+            <div class="reviews-container" id="reviews-list">
+                <div class="review-box">
+                    <div class="review-header"><strong>Carlos M.</strong><div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div></div>
+                    <p>Excelente atención, las cuentas las entregan súper rápido y funcionan sin caídas. 10/10 recomendado.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <section class="features">
+        <div class="feature"><div class="feature-icon"><i class="fa-solid fa-bolt"></i></div><div><h3>Entrega Inmediata</h3><p>Credenciales listas rápidamente.</p></div></div>
+        <div class="feature"><div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div><div><h3>Cuentas Garantizadas</h3><p>Soporte completo ante caídas.</p></div></div>
+    </section>
+    <footer>© 2026 AVJ COMMUNITY. Todos los derechos reservados.</footer>
+    <div class="modal" id="modal" onclick="closeCart()">
+        <div class="cart" onclick="event.stopPropagation()">
+            <div id="cart-view-items">
+                <div class="cart-header"><h2>Tu Pedido</h2><button class="clear-btn" onclick="clearCart()">Vaciar todo</button></div>
+                <div id="items"></div>
+                <button class="checkout-btn" onclick="goToInvoice()" style="background: #3b82f6;"><i class="fa-solid fa-file-invoice-dollar"></i> Facturar Pedido</button>
+            </div>
+            <div id="cart-view-invoice" style="display: none;">
+                <div class="cart-header"><h2><i class="fa-solid fa-receipt" style="color:#3b82f6"></i> Detalle de Factura</h2><button class="clear-btn" onclick="backToCart()" style="color:#94a3b8"><i class="fa-solid fa-arrow-left"></i> Volver</button></div>
+                <div class="digital-invoice"><div id="invoice-products-list"></div><div class="invoice-line"><span>Total Neto Mensual:</span><span style="color:#facc15; font-weight:700;">$1.50</span></div></div>
+                <div class="payment-methods-box">
+                    <h3>🎯 Métodos de Pago Disponibles</h3>
+                    <div class="payment-card"><div class="pay-title"><i class="fa-brands fa-paypal" style="color:#00457c"></i> PayPal</div><div class="pay-detail">📧 luispluajj@gmail.com</div></div>
+                    <div class="payment-card"><div class="pay-title"><i class="fa-solid fa-bank" style="color:#007343"></i> Banco Guayaquil</div><div class="pay-detail">👤 Luis Plua</div><div class="pay-detail">🏦 Ahorro # 0055390856</div><div class="pay-detail">📄 CI: 0958894834</div></div>
+                </div>
+                <button class="checkout-btn" onclick="sendWhatsApp()" style="background: #22c55e; margin-top: 15px;"><i class="fa-brands fa-whatsapp"></i> Enviar Comprobante</button>
+            </div>
+            <button class="close" onclick="closeCart()" style="margin-top: 8px;">Cerrar Ventana</button>
+        </div>
+    </div>
+    <script>
+        let cart = []; let selectedRating = 5;
+        function switchTab(tabName) {
+            document.querySelectorAll(".tab-panel").forEach(p => p.classList.remove("active"));
+            document.querySelectorAll(".tab-link").forEach(b => b.classList.remove("active"));
+            document.getElementById(`tab-content-${tabName}`).classList.add("active");
+            document.getElementById(`tab-btn-${tabName}`).classList.add("active");
+        }
+        function add(name, price) { cart.push({ id: Date.now() + Math.random(), name, price }); update(); }
+        function removeItem(id) { cart = cart.filter(item => item.id !== id); update(); }
+        function clearCart() { cart = []; backToCart(); update(); }
+        function update() {
+            document.getElementById("count").innerText = cart.length; let html = "";
+            if (cart.length === 0) { html = `<div class="empty-cart-text">El carrito está vacío</div>`; } 
+            else { cart.forEach(x => { html += `<div class="item"><div class="item-details"><span class="item-name">${x.name}</span><span class="item-price">$${x.price.toFixed(2)}</span></div><button class="remove-item" onclick="removeItem(${x.id})"><i class="fa-solid fa-trash-can"></i></button></div>`; }); }
+            document.getElementById("items").innerHTML = html;
+        }
+        window.onload = function () {
+            document.getElementById("google-login-btn").innerHTML = `<button onclick="startFakeLogin()" style="background:#fff; color:#1f2937; border:none; padding:8px 16px; border-radius:20px; font-weight:600; font-size:13px; display:flex; align-items:center; gap:8px; cursor:pointer;"><img src='https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_\"G\"_logo.svg' style='width:16px;'> Iniciar con Google</button>`;
+        }
+        function startFakeLogin() {
+            let email = prompt("Introduce tu correo de Gmail:");
+            if (email && email.includes("@")) {
+                let nom = email.split("@")[0]; nom = nom.charAt(0).toUpperCase() + nom.slice(1);
+                document.getElementById("google-login-btn").style.display = "none";
+                document.getElementById("user-avatar").src = "https://ui-avatars.com/api/?name=" + nom + "&background=3b82f6&color=fff";
+                document.getElementById("user-name").innerText = "Hola, " + nom;
+                document.getElementById("user-profile").style.display = "flex";
+                if(document.getElementById("review-name")) document.getElementById("review-name").value = nom;
+            }
+        }
+        function logout() { document.getElementById("user-profile").style.display = "none"; document.getElementById("google-login-btn").style.display = "block"; }
+        function goToInvoice() {
+            if(cart.length === 0) return alert("Carrito vacío"); let invoiceHtml = "";
+            cart.forEach(x => { invoiceHtml += `<div class="invoice-line"><span>📦 ${x.name}</span><span style="color:#3b82f6">$${x.price.toFixed(2)}</span></div>`; });
+            document.getElementById("invoice-products-list").innerHTML = invoiceHtml;
+            document.getElementById("cart-view-items").style.display = "none"; document.getElementById("cart-view-invoice").style.display = "block";
+        }
+        function backToCart() { document.getElementById("cart-view-invoice").style.display = "none"; document.getElementById("cart-view-items").style.display = "block"; }
+        function sendWhatsApp() {
+            let message = "¡Hola AVJ COMMUNITY! 👋 Acabo de revisar mi factura. Deseo adquirir:\n\n";
+            cart.forEach((x, index) => { message += `${index + 1}. 📦 *${x.name}* - $${x.price.toFixed(2)}\n`; });
+            message += `\n-------------------------\n📅 *Total neto mensual:* $1.50\n\nAdjunto comprobante. ¿Verifican los accesos?`;
+            window.open(`https://wa.me/593986514739?text=${encodeURIComponent(message)}`, '_blank');
+        }
+        function setRating(r) { selectedRating = r; document.querySelectorAll(".stars-input i").forEach((s, idx) => { if (idx < r) { s.classList.add("active"); } else { s.classList.remove("active"); } }); }
+        function submitReview() {
+            const n = document.getElementById("review-name").value.trim(), t = document.getElementById("review-text").value.trim(); if(!n || !t) return alert("Completa los campos.");
+            let sh = ""; for(let i=0; i<5; i++) sh += i < selectedRating ? `<i class="fa-solid fa-star"></i>` : `<i class="fa-regular fa-star"></i>`;
+            const b = document.createElement("div"); b.className = "review-box"; b.innerHTML = `<div class="review-header"><strong>${n}</strong><div>${sh}</div></div><p>${t}</p>`;
+            document.getElementById("reviews-list").insertBefore(b, document.getElementById("reviews-list").firstChild);
+            document.getElementById("review-name").value = ""; document.getElementById("review-text").value = ""; setRating(5);
+        }
+        function openCart() { backToCart(); document.getElementById("modal").style.display = "flex"; }
+        function closeCart() { document.getElementById("modal").style.display = "none"; }
+        setRating(5); update();
+    </script>
+</body>
+</html>
