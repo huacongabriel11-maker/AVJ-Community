@@ -40,43 +40,34 @@
         .badge-content { background: rgba(250, 204, 21, 0.1); border: 1px solid rgba(250, 204, 21, 0.3); padding: 12px 25px; border-radius: 50px; display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 14px; }
         .badge-content i, .stars-static i { color: #facc15; }
         
-        /* 🚨 EFECTO DE DESLIZAMIENTO HORIZONTAL (CARRUSEL NETFLIX STYLE) */
-        .products { max-width: 100%; padding: 20px 5%; overflow: hidden; }
+        /* BARRA DE BÚSQUEDA Y FILTROS */
+        .search-filter-section { max-width: 1200px; margin: 0 auto; padding: 0 5%; display: flex; flex-direction: column; gap: 15px; }
+        .search-wrapper { position: relative; width: 100%; }
+        .search-wrapper i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
+        .search-input { width: 100%; background: var(--bg-card); border: 1px solid rgba(255,255,255,0.08); padding: 14px 14px 14px 45px; border-radius: 12px; color: #fff; font-size: 14px; transition: border 0.3s; }
+        .search-input:focus { border-color: var(--primary); outline: none; }
+        .filter-container { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 5px; }
+        .filter-btn { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); color: var(--text-muted); padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; white-space: nowrap; transition: all 0.2s; }
+        .filter-btn:hover { color: #fff; background: rgba(255,255,255,0.06); }
+        .filter-btn.active { background: var(--primary); color: #fff; border-color: transparent; box-shadow: 0 4px 10px var(--primary-glow); }
+
+        /* CARRUSEL HORIZONTAL */
+        .products { max-width: 100%; padding: 25px 5%; overflow: hidden; }
         .products h2 { text-align: left; margin-bottom: 20px; font-size: 24px; font-weight: 800; border-left: 4px solid var(--primary); padding-left: 10px; }
-        
-        .grid { 
-            display: flex; 
-            gap: 20px; 
-            overflow-x: auto; 
-            padding-bottom: 15px; 
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-        }
-        /* Oculta la barra de scroll fea en navegadores */
+        .grid { display: flex; gap: 20px; overflow-x: auto; padding-bottom: 15px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; min-height: 380px; }
         .grid::-webkit-scrollbar { height: 6px; }
         .grid::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); }
         .grid::-webkit-scrollbar-thumb { background: rgba(59, 130, 246, 0.3); border-radius: 10px; }
         
-        .card { 
-            background: var(--bg-card); 
-            border: 1px solid rgba(255, 255, 255, 0.04); 
-            border-radius: 20px; 
-            padding: 20px; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: space-between;
-            min-width: 280px; /* Ancho fijo para cada tarjeta al deslizar */
-            max-width: 280px;
-            scroll-snap-align: start;
-        }
-        
-        .img-container { width: 100%; height: 145px; border-radius: 14px; margin-bottom: 18px; overflow: hidden; }
-        .card img { width: 100%; height: 100%; object-fit: cover; }
+        .card { background: var(--bg-card); border: 1px solid rgba(255, 255, 255, 0.04); border-radius: 20px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between; min-width: 280px; max-width: 280px; scroll-snap-align: start; transition: transform 0.3s, opacity 0.3s; }
+        .img-container { width: 100%; height: 145px; border-radius: 14px; margin-bottom: 18px; overflow: hidden; display: flex; justify-content: center; align-items: center; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.02); }
+        .img-container i { font-size: 65px; }
         .card h3 { font-size: 19px; font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
-        .card-info { color: var(--text-muted); font-size: 13px; margin-bottom: 20px; line-height: 1.4; }
+        .card-info { color: var(--text-muted); font-size: 13px; margin-bottom: 20px; line-height: 1.4; height: 54px; overflow: hidden; }
         .card-footer { display: flex; justify-content: space-between; align-items: center; }
         .price { color: #ffffff; font-size: 22px; font-weight: 700; }
         .buy { padding: 10px 18px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); color: white; font-weight: 600; border-radius: 10px; cursor: pointer; }
+        .card:hover { transform: translateY(-4px); }
         .card:hover .buy { background: var(--primary); border-color: transparent; }
         
         .reviews-section { max-width: 600px; margin: 40px auto 20px auto; padding: 0 20px; }
@@ -115,7 +106,7 @@
         .payment-methods-box h3 { font-size: 14px; margin-bottom: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
         .payment-card { background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.05); padding: 14px; border-radius: 12px; margin-bottom: 12px; transition: border 0.3s; }
         .payment-card:hover { border-color: rgba(255,255,255,0.12); }
-        .pay-title { font-weight: 700; font-size: 14px; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+        .pay-title { font-weight: 700; font-size: 14px; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
         .pay-detail { font-size: 12px; color: var(--text-muted); margin-top: 3px; }
         .features { max-width: 1200px; margin: 40px auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; padding: 0 5%; }
         .feature { background: rgba(255, 255, 255, 0.01); border: 1px solid rgba(255, 255, 255, 0.03); padding: 24px; border-radius: 16px; display: flex; gap: 16px; align-items: center; }
@@ -130,39 +121,59 @@
 <body>
     
     <script>
-        let cart = []; let selectedRating = 5;
+        let cart = []; 
+        let selectedRating = 5;
+        let currentCategory = 'todos';
 
-        function add(name, price) { 
-            agregarAlCarrito(name, price); 
-        }
-        
+        function add(name, price) { agregarAlCarrito(name, price); }
         function agregarAlCarrito(nombre, precio) { 
             cart.push({ id: Date.now() + Math.random(), name: nombre, price: precio }); 
             update(); 
         }
-
         function removeItem(id) { cart = cart.filter(item => item.id !== id); update(); }
         function clearCart() { cart = []; backToCart(); update(); }
         
         function update() {
             document.getElementById("count").innerText = cart.length; 
-            let html = "";
-            let totalMensualBase = 0;
-            
-            if (cart.length === 0) { 
-                html = `<div class="empty-cart-text">El carrito está vacío</div>`; 
-            } else { 
+            let html = ""; let totalMensualBase = 0;
+            if (cart.length === 0) { html = `<div class="empty-cart-text">El carrito está vacío</div>`; } 
+            else { 
                 cart.forEach(x => { 
                     totalMensualBase += x.price;
                     html += `<div class="item"><div class="item-details"><span class="item-name">${x.name}</span><span class="item-price">$${x.price.toFixed(2)}/mes</span></div><button class="remove-item" onclick="removeItem(${x.id})"><i class="fa-solid fa-trash-can"></i></button></div>`; 
                 }); 
             }
-            
             const meses = parseInt(document.getElementById("meses-select").value) || 1;
             const totalNetoCalculado = totalMensualBase * meses;
-            
             document.getElementById("items").innerHTML = html;
             document.getElementById("total-precio-view1").innerText = totalNetoCalculado.toFixed(2);
+        }
+
+        // CONTROLADOR DE FILTROS Y BÚSQUEDA EN TIEMPO REAL
+        function filtrarCatalogo() {
+            const searchText = document.getElementById("search-box").value.toLowerCase();
+            const tarjetas = document.querySelectorAll(".card");
+            
+            tarjetas.forEach(tarjeta => {
+                const nombre = tarjeta.getAttribute("data-name").toLowerCase();
+                const categoria = tarjeta.getAttribute("data-category");
+                
+                const coincideTexto = nombre.includes(searchText);
+                const coincideCategoria = (currentCategory === 'todos' || categoria === currentCategory);
+                
+                if (coincideTexto && coincideCategoria) {
+                    tarjeta.style.display = "flex";
+                } else {
+                    tarjeta.style.display = "none";
+                }
+            });
+        }
+
+        function setCategory(category, element) {
+            currentCategory = category;
+            document.querySelectorAll(".filter-btn").forEach(btn => btn.classList.remove("active"));
+            element.classList.add("active");
+            filtrarCatalogo();
         }
     </script>
 
@@ -186,7 +197,7 @@
             <div class="hero-content">
                 <h1>✨ AVJ COMMUNITY ✨</h1>
                 <p>Tu rincón digital exclusivo para licencias de Streaming e Inteligencia Artificial Premium. Automatizado, seguro y garantizado.</p>
-                <button onclick="document.getElementById('prod-section').scrollIntoView({behavior: 'smooth'})">Explorar Catálogo <i class="fa-solid fa-arrow-down" style="margin-left:6px"></i></button>
+                <button onclick="document.getElementById('search-filter-section').scrollIntoView({behavior: 'smooth'})">Explorar Catálogo <i class="fa-solid fa-arrow-down" style="margin-left:6px"></i></button>
             </div>
         </section>
         <section class="trust-badge">
@@ -195,103 +206,128 @@
                 <div class="stars-static"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
             </div>
         </section>
+
+        <section class="search-filter-section" id="search-filter-section">
+            <div class="search-wrapper">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="search-box" class="search-input" placeholder="¿Qué cuenta estás buscando hoy?..." oninput="filtrarCatalogo()">
+            </div>
+            <div class="filter-container">
+                <button class="filter-btn active" onclick="setCategory('todos', this)">📱 Todos</button>
+                <button class="filter-btn" onclick="setCategory('streaming', this)">🎬 Streaming</button>
+                <button class="filter-btn" onclick="setCategory('ia', this)">🤖 Inteligencia Artificial</button>
+                <button class="filter-btn" onclick="setCategory('otros', this)">🎮 Juegos / VPN</button>
+            </div>
+        </section>
         
-        <section class="products" id="prod-section">
-            <h2>Nuestros Servicios Premium (Desliza <i class="fa-solid fa-arrow-right" style="font-size:14px; color:var(--primary)"></i>)</h2>
-            <div class="grid">
-                <div class="card">
+        <section class="products">
+            <h2>Nuestros Servicios Premium (Desliza de lado <i class="fa-solid fa-arrow-right" style="font-size:14px; color:var(--primary)"></i>)</h2>
+            <div class="grid" id="carrusel-grid">
+                
+                <div class="card" data-name="Netflix" data-category="streaming">
                     <div>
-                        <div class="img-container"><img src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=400&q=80"></div>
-                        <h3><i class="fa-solid fa-play" style="color:#e50914"></i> Netflix</h3>
-                        <p class="card-info">Acceso Ultra HD 4K en pantallas privadas. Disfruta todo el catálogo oficial sin interrupciones.</p>
+                        <div class="img-container" style="background:#141414;"><i class="fa-solid fa-play" style="color:#e50914;"></i></div>
+                        <h3>Netflix UHD</h3>
+                        <p class="card-info">Acceso Ultra HD 4K en pantallas privadas. Catálogo oficial completo.</p>
                     </div>
                     <div class="card-footer"><div class="price">$4.50</div><button class="buy" onclick="add('Netflix', 4.50)">Agregar</button></div>
                 </div>
-                <div class="card">
+
+                <div class="card" data-name="Disney Bundle" data-category="streaming">
                     <div>
-                        <div class="img-container"><img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400&q=80"></div>
-                        <h3><i class="fa-solid fa-star" style="color:#00e5ff"></i> Disney Bundle</h3>
-                        <p class="card-info">Combo triple que incluye Disney+, Hulu y ESPN. Todo el contenido familiar y deportes en vivo.</p>
+                        <div class="img-container" style="background:linear-gradient(135deg, #020024, #090979);"><i class="fa-solid fa-star" style="color:#00e5ff;"></i></div>
+                        <h3>Disney Bundle</h3>
+                        <p class="card-info">Combo Premium triple con Disney+, Hulu y deportes en vivo de ESPN.</p>
                     </div>
-                    <div class="card-footer"><div class="price">$3.50</div><button class="buy" onclick="add('Disney+Hulu+ESPN', 3.50)">Agregar</button></div>
+                    <div class="card-footer"><div class="price">$3.50</div><button class="buy" onclick="add('Disney Bundle', 3.50)">Agregar</button></div>
                 </div>
-                <div class="card">
+
+                <div class="card" data-name="Paramount+" data-category="streaming">
                     <div>
-                        <div class="img-container"><img src="https://images.unsplash.com/photo-1594909122845-11baa439b7bf?w=400&q=80"></div>
-                        <h3><i class="fa-solid fa-mountain" style="color:#0054ff"></i> Paramount+</h3>
-                        <p class="card-info">Acceso Premium completo a las mejores producciones de cine y torneos exclusivos.</p>
+                        <div class="img-container" style="background:#0054ff;"><i class="fa-solid fa-mountain" style="color:#ffffff;"></i></div>
+                        <h3>Paramount+</h3>
+                        <p class="card-info">Cine premium mundial y transmisiones exclusivas de torneos de fútbol.</p>
                     </div>
                     <div class="card-footer"><div class="price">$3.00</div><button class="buy" onclick="add('Paramount', 3.00)">Agregar</button></div>
                 </div>
-                <div class="card">
+
+                <div class="card" data-name="Max HBO" data-category="streaming">
                     <div>
-                        <div class="img-container"><img src="https://images.unsplash.com/photo-1616469829581-73993eb86b02?w=400&q=80"></div>
-                        <h3><i class="fa-solid fa-clapperboard" style="color:#9d4edd"></i> Max (HBO)</h3>
-                        <p class="card-info">Series multipremiadas mundiales, estrenos de taquilla directo a tu pantalla.</p>
+                        <div class="img-container" style="background:#000046;"><i class="fa-solid fa-clapperboard" style="color:#9d4edd;"></i></div>
+                        <h3>Max (HBO)</h3>
+                        <p class="card-info">Series multipremiadas globales y estrenos directos de taquilla.</p>
                     </div>
                     <div class="card-footer"><div class="price">$3.50</div><button class="buy" onclick="add('HBO', 3.50)">Agregar</button></div>
                 </div>
-                <div class="card">
+
+                <div class="card" data-name="YouTube Premium" data-category="streaming">
                     <div>
-                        <div class="img-container"><img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=400&q=80"></div>
-                        <h3><i class="fa-brands fa-youtube" style="color:#ff0000"></i> YouTube Premium</h3>
-                        <p class="card-info">Cero anuncios molestos, reproducción en segundo plano y YouTube Music incluido.</p>
+                        <div class="img-container" style="background:#ff0000;"><i class="fa-brands fa-youtube" style="color:#ffffff;"></i></div>
+                        <h3>YouTube Premium</h3>
+                        <p class="card-info">Sin anuncios molestos, reproducción en segundo plano y YT Music.</p>
                     </div>
                     <div class="card-footer"><div class="price">$4.50</div><button class="buy" onclick="add('YouTube Premium', 4.50)">Agregar</button></div>
                 </div>
-                <div class="card">
+
+                <div class="card" data-name="Spotify Premium" data-category="streaming">
                     <div>
-                        <div class="img-container"><img src="https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?w=400&q=80"></div>
-                        <h3><i class="fa-brands fa-spotify" style="color:#1ed760"></i> Spotify Premium</h3>
-                        <p class="card-info">Música sin límites ni interrupciones comerciales. Descarga tus playlists de inmediato.</p>
+                        <div class="img-container" style="background:#191414;"><i class="fa-brands fa-spotify" style="color:#1ed760;"></i></div>
+                        <h3>Spotify Premium</h3>
+                        <p class="card-info">Música ilimitada offline y descargas en alta fidelidad sin comerciales.</p>
                     </div>
                     <div class="card-footer"><div class="price">$3.50</div><button class="buy" onclick="add('Spotify Premium', 3.50)">Agregar</button></div>
                 </div>
-                <div class="card">
+
+                <div class="card" data-name="Gemini Google One 5TB" data-category="ia">
                     <div>
-                        <div class="img-container"><img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&q=80"></div>
-                        <h3><i class="fa-solid fa-cloud" style="color:#ea4335"></i> Gemini + Google One</h3>
-                        <p class="card-info">Almacenamiento masivo de 5TB de espacio en la nube de Google y acceso total a Gemini Advanced.</p>
+                        <div class="img-container" style="background:linear-gradient(135deg, #4285f4, #ea4335);"><i class="fa-solid fa-cloud" style="color:#fff;"></i></div>
+                        <h3>Gemini + 5TB</h3>
+                        <p class="card-info">Nube masiva de Google One de 5TB de espacio junto a Gemini Advanced.</p>
                     </div>
                     <div class="card-footer"><div class="price">$12.00</div><button class="buy" onclick="add('Gemini+Google one 5TB', 12.00)">Agregar</button></div>
                 </div>
-                <div class="card">
+
+                <div class="card" data-name="ChatGPT PLUS" data-category="ia">
                     <div>
-                        <div class="img-container"><img src="https://images.unsplash.com/photo-1677442136019-21780efad99a?w=400&q=80"></div>
-                        <h3><i class="fa-solid fa-robot" style="color:#10a37f"></i> ChatGPT PLUS</h3>
-                        <p class="card-info">Acceso prioritario a los modelos más veloces de OpenAI. Respuestas inmediatas sin restricciones.</p>
+                        <div class="img-container" style="background:#10a37f;"><i class="fa-solid fa-robot" style="color:#ffffff;"></i></div>
+                        <h3>ChatGPT PLUS</h3>
+                        <p class="card-info">Acceso prioritario libre de restricciones a los modelos avanzados de OpenAI.</p>
                     </div>
                     <div class="card-footer"><div class="price">$7.00</div><button class="buy" onclick="add('Chat gpt PLUS', 7.00)">Agregar</button></div>
                 </div>
-                <div class="card">
+
+                <div class="card" data-name="Crunchyroll Mensual" data-category="streaming">
                     <div>
-                        <div class="img-container"><img src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=400&q=80"></div>
-                        <h3><i class="fa-solid fa-circle-play" style="color:#f47521"></i> Crunchyroll</h3>
-                        <p class="card-info">Pase mensual Mega Fan. Disfruta del mejor anime del mundo en HD y sin publicidad.</p>
+                        <div class="img-container" style="background:#f47521;"><i class="fa-solid fa-circle-play" style="color:#ffffff;"></i></div>
+                        <h3>Crunchyroll Mes</h3>
+                        <p class="card-info">Suscripción premium Mega Fan para ver anime en HD sin publicidad.</p>
                     </div>
                     <div class="card-footer"><div class="price">$3.50</div><button class="buy" onclick="add('Crunchyroll Mensual', 3.50)">Agregar</button></div>
                 </div>
-                <div class="card">
+
+                <div class="card" data-name="Crunchyroll Anual" data-category="streaming">
                     <div>
-                        <div class="img-container"><img src="https://images.unsplash.com/photo-1578632767115-351597cf2477?w=400&q=80"></div>
-                        <h3><i class="fa-solid fa-crown" style="color:#f47521"></i> Crunchyroll Anual</h3>
-                        <p class="card-info">Suscripción premium por 12 meses completos. Asegura tus series para todo el año.</p>
+                        <div class="img-container" style="background:linear-gradient(45deg, #facc15, #f47521);"><i class="fa-solid fa-crown" style="color:#ffffff;"></i></div>
+                        <h3>Crunchyroll Año</h3>
+                        <p class="card-info">Pase Premium anual completo por 12 meses. Asegura tus series.</p>
                     </div>
                     <div class="card-footer"><div class="price">$10.00</div><button class="buy" onclick="add('Crunchyroll Anual', 10.00)">Agregar</button></div>
                 </div>
-                <div class="card">
+
+                <div class="card" data-name="Steam Balance" data-category="otros">
                     <div>
-                        <div class="img-container"><img src="https://images.unsplash.com/photo-1612287230202-1bf1d85d1bdf?w=400&q=80"></div>
-                        <h3><i class="fa-brands fa-steam" style="color:#171a21"></i> Steam Balance</h3>
-                        <p class="card-info">Expande tu biblioteca de videojuegos de PC o adquiere skins directamente en tu cuenta.</p>
+                        <div class="img-container" style="background:#171a21;"><i class="fa-brands fa-steam" style="color:#00beef;"></i></div>
+                        <h3>Steam Balance</h3>
+                        <p class="card-info">Fondos directos para expandir tu biblioteca de juegos y comprar skins.</p>
                     </div>
                     <div class="card-footer"><div class="price">$5.00</div><button class="buy" onclick="add('Steam', 5.00)">Agregar</button></div>
                 </div>
-                <div class="card">
+
+                <div class="card" data-name="NordVPN" data-category="otros">
                     <div>
-                        <div class="img-container"><img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=400&q=80"></div>
-                        <h3><i class="fa-solid fa-shield" style="color:#468af7"></i> NordVPN</h3>
-                        <p class="card-info">Navegación 100% privada y segura. Desbloquea catálogos de streaming internacionales.</p>
+                        <div class="img-container" style="background:#468af7;"><i class="fa-solid fa-shield" style="color:#ffffff;"></i></div>
+                        <h3>NordVPN</h3>
+                        <p class="card-info">Navegación encriptada privada. Desbloquea catálogos de streaming del mundo.</p>
                     </div>
                     <div class="card-footer"><div class="price">$3.00</div><button class="buy" onclick="add('Nord VPN', 3.00)">Agregar</button></div>
                 </div>
@@ -315,11 +351,7 @@
                 <button class="submit-review-btn" onclick="submitReview()">Publicar Reseña</button>
             </div>
             <div class="reviews-container" id="reviews-list">
-                <div class="review-box">
-                    <div class="review-header"><strong>Carlos M.</strong><div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div></div>
-                    <p>Excelente atención, las cuentas las entregan súper rápido y funcionan sin caídas. 10/10 recomendado.</p>
                 </div>
-            </div>
         </section>
     </main>
     
@@ -372,18 +404,17 @@
                 
                 <div class="payment-methods-box">
                     <h3>🎯 Elige Pasarela de Pago Seguro</h3>
-                    
                     <div id="paypal-button-container" style="margin-bottom: 12px; width: 100%;"></div>
                     
-                    <div class="payment-card" style="border: 1px dashed var(--neon-purple); background: linear-gradient(180deg, rgba(168, 85, 247, 0.08), rgba(0,0,0,0.2)); text-align: center; position: relative;">
+                    <div class="payment-card" style="border: 1px dashed var(--neon-purple); background: linear-gradient(180deg, rgba(168, 85, 247, 0.08), rgba(0,0,0,0.2)); text-align: center;">
                         <div class="pay-title" style="color:var(--neon-purple); font-size:15px; justify-content:center; letter-spacing:0.5px;">
-                            <span style="background:var(--accent); color:white; width:22px; height:22px; display:inline-flex; justify-content:center; align-items:center; border-radius:50%; font-size:13px; font-weight:bold; box-shadow: 0 0 10px rgba(168,85,247,0.5);">Ł</span> 
+                            <span style="background:var(--accent); color:white; width:22px; height:22px; display:inline-flex; justify-content:center; align-items:center; border-radius:50%; font-size:13px; font-weight:bold;">Ł</span> 
                             Litecoin Automatizado (LTC)
                         </div>
                         <p style="font-size:11px; margin: 6px 0 10px 0; color: var(--text-muted);">Completa la transacción mandando el monto equivalente a:</p>
                         <input type="text" value="Ltc1qg6auul6f2mwtjq58ywurt8mdfqnggmlzhxgw3d" id="ltc-address" readonly 
-                            style="width:100%; background:#060913; border:1px solid rgba(168,85,247,0.3); color:var(--neon-green); padding:10px; border-radius:8px; font-size:11px; text-align:center; font-family:monospace; font-weight:bold; letter-spacing:0.3px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);">
-                        <button onclick="copiarDireccionLTC()" style="width:100%; margin-top:8px; background:linear-gradient(90deg, #a855f7, #7c3aed); border:none; color:white; padding:9px; border-radius:8px; font-size:12px; font-weight:800; cursor:pointer; text-transform:uppercase; box-shadow: 0 4px 10px rgba(168,85,247,0.25);"><i class="fa-regular fa-copy"></i> Copiar Dirección Wallet</button>
+                            style="width:100%; background:#060913; border:1px solid rgba(168,85,247,0.3); color:var(--neon-green); padding:10px; border-radius:8px; font-size:11px; text-align:center; font-family:monospace; font-weight:bold;">
+                        <button onclick="copiarDireccionLTC()" style="width:100%; margin-top:8px; background:linear-gradient(90deg, #a855f7, #7c3aed); border:none; color:white; padding:9px; border-radius:8px; font-size:12px; font-weight:800; cursor:pointer; text-transform:uppercase;"><i class="fa-regular fa-copy"></i> Copiar Dirección Wallet</button>
                     </div>
 
                     <h3>🏦 Transferencia Local (Ecuador)</h3>
@@ -406,6 +437,7 @@
         
         window.onload = function () {
             document.getElementById("google-login-btn").innerHTML = `<button onclick="startFakeLogin()" style="background:#fff; color:#1f2937; border:none; padding:8px 16px; border-radius:20px; font-weight:600; font-size:13px; display:flex; align-items:center; gap:8px; cursor:pointer;"><img src='https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_\"G\"_logo.svg' style='width:16px;'> Iniciar con Google</button>`;
+            cargarComentariosPermanentes();
         }
         
         function startFakeLogin() {
@@ -427,49 +459,37 @@
         
         function goToInvoice() {
             if(cart.length === 0) return alert("El carrito está vacío. Agrega algún servicio."); 
-            
-            let invoiceHtml = "";
-            let totalMensualBase = 0;
-            
+            let invoiceHtml = ""; let totalMensualBase = 0;
             cart.forEach(x => { 
                 totalMensualBase += x.price;
                 invoiceHtml += `<div class="invoice-line"><span>📦 ${x.name}</span><span style="color:#3b82f6">$${x.price.toFixed(2)}</span></div>`; 
             });
-            
             const meses = parseInt(document.getElementById("meses-select").value) || 1;
             const totalFinal = totalMensualBase * meses;
             
             document.getElementById("invoice-products-list").innerHTML = invoiceHtml;
             document.getElementById("invoice-months-count").innerText = meses;
             document.getElementById("total-precio-invoice").innerText = totalFinal.toFixed(2);
-            
             document.getElementById("cart-view-items").style.display = "none"; 
             document.getElementById("cart-view-invoice").style.display = "block";
             
             document.getElementById('paypal-button-container').innerHTML = '';
             paypal.Buttons({
                 createOrder: function(data, actions) {
-                    return actions.order.create({
-                        purchase_units: [{
-                            amount: { value: totalFinal.toFixed(2) }
-                        }]
-                    });
+                    return actions.order.create({ purchase_units: [{ amount: { value: totalFinal.toFixed(2) } }] });
                 },
                 onApprove: function(data, actions) {
                     return actions.order.capture().then(function(details) {
                         alert('¡Pago completado con éxito por ' + details.payer.name.given_name + '! Tu servicio de AVJ COMMUNITY se activará de inmediato.');
-                        clearCart();
-                        closeCart();
+                        clearCart(); closeCart();
                     });
                 },
-                onError: function(err) {
-                    alert('Error al procesar el pago automático. Intenta de nuevo.');
-                }
+                onError: function(err) { alert('Error al procesar el pago automático. Intenta de nuevo.'); }
             }).render('#paypal-button-container');
         }
         
         function backToCart() { 
-            document.getElementById("modal").style.display = "none"; 
+            document.getElementById("cart-view-invoice").style.display = "none"; 
             document.getElementById("cart-view-items").style.display = "block"; 
         }
         
@@ -492,37 +512,44 @@
         function submitReview() {
             const n = document.getElementById("review-name").value.trim(), t = document.getElementById("review-text").value.trim(); 
             if(!n || !t) return alert("Completa los campos.");
-            let sh = ""; 
-            for(let i=0; i<5; i++) sh += i < selectedRating ? `<i class="fa-solid fa-star"></i>` : `<i class="fa-regular fa-star"></i>`;
-            const b = document.createElement("div"); 
-            b.className = "review-box"; 
-            b.innerHTML = `<div class="review-header"><strong>${n}</strong><div>${sh}</div></div><p>${t}</p>`;
-            document.getElementById("reviews-list").insertBefore(b, document.getElementById("reviews-list").firstChild);
-            document.getElementById("review-name").value = ""; 
-            document.getElementById("review-text").value = ""; 
-            setRating(5);
+            
+            const nuevoComentario = { nombre: n, texto: t, estrellas: selectedRating, fecha: Date.now() };
+            let comentariosAnteriores = JSON.parse(localStorage.getItem("comentarios_avj")) || [];
+            comentariosAnteriores.unshift(nuevoComentario);
+            localStorage.setItem("comentarios_avj", JSON.stringify(comentariosAnteriores));
+            
+            inyectarComentarioHTML(nuevoComentario, true);
+            document.getElementById("review-name").value = ""; document.getElementById("review-text").value = ""; setRating(5);
+        }
+
+        function cargarComentariosPermanentes() {
+            let comentarios = JSON.parse(localStorage.getItem("comentarios_avj")) || [];
+            if(comentarios.length === 0) {
+                comentarios = [{ nombre: "Carlos M.", texto: "Excelente atención, las cuentas las entregan súper rápido y funcionan sin caídas. 10/10 recomendado.", estrellas: 5 }];
+                localStorage.setItem("comentarios_avj", JSON.stringify(comentarios));
+            }
+            comentarios.forEach(c => inyectarComentarioHTML(c, false));
+        }
+
+        function inyectarComentarioHTML(c, alPrincipio) {
+            let sh = ""; for(let i=0; i<5; i++) sh += i < c.estrellas ? `<i class="fa-solid fa-star"></i>` : `<i class="fa-regular fa-star"></i>`;
+            const b = document.createElement("div"); b.className = "review-box"; 
+            b.innerHTML = `<div class="review-header"><strong>${c.nombre}</strong><div>${sh}</div></div><p>${c.texto}</p>`;
+            
+            const lista = document.getElementById("reviews-list");
+            if(alPrincipio) { lista.insertBefore(b, lista.firstChild); } 
+            else { lista.appendChild(b); }
         }
         
-        function openCart() { 
-            backToCart(); 
-            document.getElementById("modal").style.display = "flex"; 
-        }
-        
-        function closeCart() { 
-            document.getElementById("modal").style.display = "none"; 
-        }
-        
+        function openCart() { backToCart(); document.getElementById("modal").style.display = "flex"; }
+        function closeCart() { document.getElementById("modal").style.display = "none"; }
         function copiarDireccionLTC() {
-            const copyText = document.getElementById("ltc-address");
-            copyText.select();
-            copyText.setSelectionRange(0, 99999);
-            navigator.clipboard.writeText(copyText.value);
-            alert("¡Billetera Litecoin copiada al portapapeles con éxito!");
+            const copyText = document.getElementById("ltc-address"); copyText.select(); copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value); alert("¡Billetera Litecoin copiada al portapapeles con éxito!");
         }
-        
-        setRating(5); 
-        update();
+        setRating(5); update();
     </script>
 </body>
 </html>
+
 
