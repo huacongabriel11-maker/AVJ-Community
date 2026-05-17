@@ -78,27 +78,33 @@
         .digital-invoice { background: rgba(255, 255, 255, 0.02); border: 1px dashed rgba(255, 255, 255, 0.15); padding: 16px; border-radius: 12px; margin-bottom: 20px; }
         .invoice-line { display: flex; justify-content: space-between; font-size: 14px; padding: 6px 0; }
         .payment-methods-box { margin-top: 15px; }
-        .payment-methods-box h3 { font-size: 15px; margin-bottom: 10px; color: var(--text-muted); }
-        .payment-card { background: rgba(0, 0, 0, 0.25); border: 1px solid rgba(255, 255, 255, 0.05); padding: 12px; border-radius: 10px; margin-bottom: 10px; }
-        .pay-title { font-weight: 700; font-size: 14px; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
-        .pay-detail { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
-        .features { max-width: 1200px; margin: 40px auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; padding: 0 5%; }
-        .feature { background: rgba(255, 255, 255, 0.01); border: 1px solid rgba(255, 255, 255, 0.03); padding: 24px; border-radius: 16px; display: flex; gap: 16px; align-items: center; }
-        .feature-icon { background: rgba(59, 130, 246, 0.1); color: var(--primary); width: 44px; height: 44px; min-width: 44px; border-radius: 12px; display: flex; justify-content: center; align-items: center; }
-        footer { padding: 30px 20px; border-top: 1px solid rgba(255, 255, 255, 0.05); text-align: center; color: var(--text-muted); font-size: 13px; }
-        @media(max-width: 768px) { header { padding: 15px 4%; flex-wrap: wrap; gap: 10px; } .nav-tabs { order: 3; width: 100%; justify-content: center; } .auth-container { order: 2; } .tab-link { font-size: 13px; padding: 6px 12px; } }
-    </style>
-</head>
-<body>
-    <header>
-        <div class="logo"><i class="fa-solid fa-crown logo-accent"></i> AVJ&nbsp;<span class="logo-accent">COMMUNITY</span></div>
-        <nav class="nav-tabs">
-            <button id="tab-btn-inicio" class="tab-link active" onclick="switchTab('inicio')">Inicio</button>
-            <button id="tab-btn-comentarios" class="tab-link" onclick="switchTab('comentarios')">Comentarios</button>
-        </nav>
-        <div class="auth-container">
-            <div id="google-login-btn"></div>
-            <div id="user-profile" class="user-profile-box" style="display: none;">
+        .function actualizarCarrito() {
+    const contenedor = document.getElementById('items-carrito');
+    contenedor.innerHTML = '';
+    
+    let totalMensual = 0;
+
+    carrito.forEach((producto, indice) => {
+        totalMensual += producto.precio;
+
+        const div = document.createElement('div');
+        div.style.display = 'flex';
+        div.style.justifyContent = 'space-between';
+        div.style.marginBottom = '10px';
+        div.innerHTML = `
+            <span>${producto.nombre} - $${producto.precio.toFixed(2)}/mes</span>
+            <button onclick="eliminarDelCarrito(${indice})" style="background-color: #ff4d4d; color: white; border: none; padding: 2px 8px; border-radius: 4px; cursor: pointer;">X</button>
+        `;
+        contenedor.appendChild(div);
+    });
+
+    const meses = parseInt(document.getElementById('meses').value) || 1;
+    const totalNeto = totalMensual * meses;
+
+    document.getElementById('total-precio').innerText = totalNeto.toFixed(2);
+            }
+            
+        <div id="user-profile" class="user-profile-box" style="display: none;">
                 <img id="user-avatar" src="" alt="Avatar"><span id="user-name"></span><button class="logout-btn" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i></button>
             </div>
         </div>
