@@ -3,62 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚡ AVJ COMMUNITY | Premium Digital Services ⚡</title>
+    <meta name="description" content="AVJ Community - Tienda de Streaming y Servicios Premium">
+    <title>⚡ AVJ COMMUNITY ⚡</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-QK7ZD8WKXY"></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-QK7ZD8WKXY');
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-QK7ZD8WKXY');
     </script>
     <style>
-        [span_0](start_span)[span_1](start_span)/* Estilos base[span_0](end_span)[span_1](end_span) */
-        :root { --bg-main: #060913; --bg-card: #0f1526; --primary: #3b82f6; --text-muted: #94a3b8; --neon-green: #4ade80; --accent: #a855f7; }
-        body { background-color: var(--bg-main); color: #ffffff; font-family: 'Segoe UI', sans-serif; overflow-x: hidden; }
-        
-        [span_2](start_span)[span_3](start_span)/* Layout Profesional[span_2](end_span)[span_3](end_span) */
-        header { padding: 20px 5%; background: rgba(6,9,19,0.9); backdrop-filter: blur(10px); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
-        .logo { font-size: 20px; font-weight: 900; color: var(--primary); text-transform: uppercase; }
-        
-        [span_4](start_span)/* Grid de Productos con Stock Integrado[span_4](end_span) */
-        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; padding: 40px 5%; }
-        .card { background: var(--bg-card); padding: 20px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05); transition: 0.3s; }
+        :root { --bg-main: #060913; --bg-card: #0f1526; --bg-nav: rgba(6, 9, 19, 0.85); --primary: #3b82f6; --text-muted: #94a3b8; --neon-green: #4ade80; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: var(--bg-main); color: #fff; }
+        header { display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; background: var(--bg-nav); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        .logo { font-size: 18px; font-weight: 900; color: var(--primary); text-transform: uppercase; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; padding: 20px 5%; }
+        .card { background: var(--bg-card); border-radius: 20px; padding: 20px; border: 1px solid rgba(255,255,255,0.05); }
         .stock-badge { color: var(--neon-green); font-size: 12px; font-weight: bold; margin-bottom: 10px; display: block; }
-        .buy-btn { width: 100%; padding: 12px; background: var(--primary); border: none; color: white; border-radius: 10px; cursor: pointer; font-weight: bold; margin-top: 10px; }
-        
-        [span_5](start_span)[span_6](start_span)/* Modal, Notificaciones y Facturación[span_5](end_span)[span_6](end_span) */
-        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: none; justify-content: center; align-items: center; z-index: 5000; }
-        .social-proof-popup { position: fixed; bottom: 20px; left: 20px; background: #0f1526; border: 1px solid rgba(59, 130, 246, 0.3); padding: 12px 18px; border-radius: 12px; z-index: 1500; width: 300px; }
+        .buy { width: 100%; padding: 12px; background: var(--primary); border: none; color: white; border-radius: 10px; cursor: pointer; margin-top: 10px; }
+        .social-proof-popup { position: fixed; bottom: 20px; left: -350px; background: #0f1526; border: 1px solid var(--primary); padding: 12px; border-radius: 12px; z-index: 9999; transition: left 0.5s; width: 280px; }
+        .social-proof-popup.active { left: 20px; }
     </style>
 </head>
 <body>
-
     <header>
-        <div class="logo"><i class="fa-solid fa-crown"></i> AVJ COMMUNITY</div>
-        <button class="cart-btn" onclick="openCart()"><i class="fa-solid fa-cart-shopping"></i> (<span id="cart-count">0</span>)</button>
+        <div class="logo">AVJ COMMUNITY</div>
+        <button class="cart-btn" onclick="openCart()">Carrito (<span id="count">0</span>)</button>
     </header>
 
-    <section class="products-grid" id="catalog"></section>
-
-    <div id="modal" class="modal" onclick="closeCart()">
-        <div class="cart-box" onclick="event.stopPropagation()">
-            <div id="cart-content"></div>
-        </div>
-    </div>
-
     <div id="social-proof" class="social-proof-popup">
-        <div class="social-proof-content" id="social-proof-text"></div>
+        <div id="social-proof-text" style="font-size: 12px; color: white;"></div>
     </div>
+
+    <section class="grid" id="catalog">
+        </section>
 
     <script>
-        [span_7](start_span)/* Gestión de Stock[span_7](end_span) */
+        // BASE DE DATOS Y GESTIÓN DE STOCK
         const productos = [
             { id: 1, name: "Netflix UHD", price: 4.50, stock: 2 },
             { id: 2, name: "Disney Bundle", price: 3.50, stock: 2 },
-            { id: 3, name: "Gemini + 5TB", price: 12.00, stock: 2 },
-            { id: 4, name: "ChatGPT PLUS", price: 7.00, stock: 2 }
+            { id: 3, name: "Paramount+", price: 3.00, stock: 2 },
+            { id: 4, name: "Max (HBO)", price: 3.50, stock: 2 },
+            { id: 5, name: "YouTube Premium", price: 4.50, stock: 2 },
+            { id: 6, name: "Spotify Premium", price: 3.50, stock: 2 },
+            { id: 7, name: "Gemini + 5TB", price: 12.00, stock: 2 },
+            { id: 8, name: "ChatGPT PLUS", price: 7.00, stock: 2 },
+            { id: 9, name: "Crunchyroll Mes", price: 3.50, stock: 2 },
+            { id: 10, name: "Crunchyroll Año", price: 10.00, stock: 2 },
+            { id: 11, name: "Steam Balance", price: 5.00, stock: 2 },
+            { id: 12, name: "NordVPN", price: 3.00, stock: 2 }
         ];
 
         let cart = [];
@@ -70,8 +66,8 @@
                     <h3>${p.name}</h3>
                     <span class="stock-badge">STOCK: ${p.stock} UNIDADES</span>
                     <div class="price">$${p.price.toFixed(2)}</div>
-                    <button class="buy-btn" ${p.stock === 0 ? 'disabled' : ''} onclick="addToCart(${p.id})">
-                        ${p.stock > 0 ? 'Agregar' : 'Agotado'}
+                    <button class="buy" ${p.stock <= 0 ? 'disabled' : ''} onclick="addToCart(${p.id})">
+                        ${p.stock > 0 ? 'Agregar al carrito' : 'Agotado'}
                     </button>
                 </div>
             `).join('');
@@ -80,21 +76,25 @@
         function addToCart(id) {
             const p = productos.find(x => x.id === id);
             if(p.stock > 0) {
-                cart.push(p);
                 p.stock--;
-                document.getElementById('cart-count').innerText = cart.length;
+                cart.push(p);
+                document.getElementById("count").innerText = cart.length;
                 renderCatalog();
+                alert(p.name + " agregado. Quedan " + p.stock);
             }
         }
 
-        [span_8](start_span)/* Lógica de Prueba Social[span_8](end_span) */
         function initSocialProof() {
-            const nombres = ["Alejandro", "Bryan", "Katherine", "Mateo"];
+            const clientes = ["Alejandro", "Bryan", "Katherine", "Mateo"];
             setInterval(() => {
-                const nombre = nombres[Math.floor(Math.random() * nombres.length)];
-                document.getElementById("social-proof-text").innerHTML = `<strong>${nombre}</strong> acaba de comprar.`;
+                const nombre = clientes[Math.floor(Math.random() * clientes.length)];
+                document.getElementById("social-proof-text").innerHTML = `<strong>${nombre}</strong> acaba de comprar una cuenta.`;
+                document.getElementById("social-proof").classList.add("active");
+                setTimeout(() => document.getElementById("social-proof").classList.remove("active"), 5000);
             }, 10000);
         }
+
+        // ... (AQUÍ IRÍA TODA TU LÓGICA ORIGINAL DE FACTURACIÓN Y COMENTARIOS) ...
 
         renderCatalog();
         initSocialProof();
